@@ -13,6 +13,9 @@ python-dotenv = "^1.0.1"
 pymupdf = "^1.25.1"
 boto3 = "^1.35.90"
 chromadb = "^0.5.23"
+langchain = "^0.3.13"
+langchain-community = "^0.3.13"
+sentence-transformers = "^3.3.1"
 
 
 [build-system]

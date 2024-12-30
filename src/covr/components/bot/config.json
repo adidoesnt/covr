@@ -19,6 +19,12 @@
         },
         "resume": {
             "response": "You can upload your resume here using Telegram's file upload feature."
+        },
+        "invalid_file": {
+            "response": "Sorry, but only PDF files are supported."
+        },
+        "file_uploaded": {
+            "response": "Your resume has been uploaded successfully."
         }
     }
 }

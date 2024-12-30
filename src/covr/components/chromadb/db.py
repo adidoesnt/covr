@@ -1,6 +1,10 @@
 from chromadb import HttpClient, config
+from langchain.embeddings import HuggingFaceEmbeddings
 
 from covr.components.chromadb.constants import CHROMADB_HOST, CHROMADB_PORT, CHROMA_CLIENT_AUTH_PROVIDER, CHROMA_CLIENT_AUTH_CREDENTIALS, CHROMA_AUTH_TOKEN_TRANSPORT_HEADER
+from covr.components.langchain.constants import EMBEDDINGS_MODEL_NAME
+
+embeddings_model = HuggingFaceEmbeddings(model_name=EMBEDDINGS_MODEL_NAME)
 
 client = HttpClient(
     host=CHROMADB_HOST,
@@ -20,4 +24,23 @@ def connect_chromadb():
     except Exception as e:
         print("Error connecting to ChromaDB:", e)
         exit(1)
+        
+def upload_resume(user_id, file_content):
+    try:
+        print(f"Uploading resume for user {user_id}...")
+        
+        collection = client.get_or_create_collection(f"user_{user_id}")
+        embeddings = embeddings_model.embed_query(file_content)
+        
+        collection.add(
+            ids=[f"resume_{user_id}"],
+            metadatas=[{"user_id": user_id}],
+            embeddings=embeddings,
+            documents=[file_content]
+        )
+        
+        print(f"Resume uploaded successfully for user {user_id}.")
+    except Exception as e:
+        print("Error uploading resume:", e)
+        raise e
     

@@ -1,22 +1,44 @@
 from telebot import TeleBot
-from telebot.types import BotCommand
+from telebot.types import BotCommand, Message
 from typing import List
 import threading
 
 from covr.components.bot.constants import TELEGRAM_BOT_TOKEN
 from covr.components.bot.config import config
+from covr.components.resume_parser.parser import parse_pdf
+from covr.components.chromadb.db import upload_resume as save_resume_to_db
 
 
 bot = TeleBot(TELEGRAM_BOT_TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
-def help(message):
+def help(message: Message):
     response = config['responses']['start']['response']
     bot.reply_to(message, response)
     
 @bot.message_handler(commands=['resume'])
-def upload_resume(message):
+def upload_resume(message: Message):
     response = config['responses']['resume']['response']
+    bot.reply_to(message, response)
+    
+@bot.message_handler(content_types=['document'])
+def file_handler(message: Message):
+    user = message.from_user
+    user_id = user.id
+    
+    file_id = message.document.file_id
+    file = bot.get_file(file_id=file_id)
+    
+    if not file.file_path.endswith('.pdf'):
+        response = config['responses']['invalid_file']['response']
+        bot.reply_to(message, response)
+        return
+    
+    file = bot.download_file(file_path=file.file_path)
+    parsed_file_content = parse_pdf(file_content=file)
+    
+    save_resume_to_db(user_id=user_id, file_content=parsed_file_content)
+    response = config['responses']['file_uploaded']['response']
     bot.reply_to(message, response)
 
 def set_my_commands():
