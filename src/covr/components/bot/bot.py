@@ -7,7 +7,6 @@ from covr.components.bot.config import config
 from covr.components.resume_parser.parser import parse_pdf
 from covr.components.chromadb.db import upload_resume as save_resume_to_db, check_if_resume_exists
 
-
 bot = TeleBot(TELEGRAM_BOT_TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
@@ -49,6 +48,30 @@ def file_handler(message: Message):
     save_resume_to_db(user_id=user_id, file_content=parsed_file_content)
     response = config['responses']['file_uploaded']['response']
     bot.reply_to(message, response)
+    
+@bot.message_handler(commands=['coverletter'])
+def handle_coverletter_request(message):
+    user = message.from_user
+    user_id = user.id
+    
+    is_resume_uploaded = check_if_resume_exists(user_id=user_id)
+    
+    if not is_resume_uploaded:
+        response = config['responses']['no_resume']['response']
+        bot.reply_to(message, response)
+        return
+    
+    response = config['responses']['coverletter']['response']
+    bot.reply_to(message, response)
+    
+    bot.register_next_step_handler(callback=generate_cover_letter, message=message)
+    
+def generate_cover_letter(message: Message):
+    # TODO: Implement cover letter generation
+    
+    response = 'Sorry, this feature is not yet implemented.'
+    bot.reply_to(message, response)
+    
 
 def set_my_commands():
     try:

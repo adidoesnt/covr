@@ -11,6 +11,10 @@
         {
             "command": "resume",
             "description": "Upload your resume."
+        },
+        {
+            "command": "coverletter",
+            "description": "Generate a cover letter."
         }
     ],
     "responses": {
@@ -20,11 +24,17 @@
         "resume": {
             "response": "You can upload your resume here using Telegram's file upload feature."
         },
+        "no_resume": {
+            "response": "Sorry, but you haven't uploaded your resume yet."
+        },
         "invalid_file": {
             "response": "Sorry, but only PDF files are supported."
         },
         "file_uploaded": {
             "response": "Your resume has been uploaded successfully."
+        },
+        "coverletter": {
+            "response": "Please send me the description of the job you would like me to write a cover letter for."
         }
     }
 }
