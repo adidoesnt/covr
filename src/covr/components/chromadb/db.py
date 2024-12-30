@@ -44,3 +44,14 @@ def upload_resume(user_id, file_content):
         print("Error uploading resume:", e)
         raise e
     
+def check_if_resume_exists(user_id):
+    try:
+        collection = client.get_collection(f"user_{user_id}")
+        
+        if collection.count() == 0:
+            return False
+        else:
+            return True
+    except Exception as e:
+        print("Error checking if resume exists:", e)
+        raise e
