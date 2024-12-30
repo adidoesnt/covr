@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "covr"
+version = "0.1.0"
+description = ""
+authors = ["Banerjee Aditya <aditya.banerjee@activate.sg>"]
+readme = "README.md"
+packages = [{include = "covr", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
