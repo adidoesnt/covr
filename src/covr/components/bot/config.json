@@ -1,0 +1,24 @@
+{
+    "commands": [
+        {
+            "command": "start",
+            "description": "Start the bot."
+        },
+        {
+            "command": "help",
+            "description": "How do I use the bot?"
+        },
+        {
+            "command": "resume",
+            "description": "Upload your resume."
+        }
+    ],
+    "responses": {
+        "start": {
+            "response": "Hi, I'm Covr. I'm here to help you write a cover letter tailored to your resume and dream job."
+        },
+        "resume": {
+            "response": "You can upload your resume here using Telegram's file upload feature."
+        }
+    }
+}

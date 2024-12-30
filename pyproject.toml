@@ -8,6 +8,8 @@ packages = [{include = "covr", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+pytelegrambotapi = "^4.25.0"
+python-dotenv = "^1.0.1"
 
 
 [build-system]
