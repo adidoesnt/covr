@@ -10,6 +10,7 @@ packages = [{include = "covr", from = "src"}]
 python = "^3.12"
 pytelegrambotapi = "^4.25.0"
 python-dotenv = "^1.0.1"
+pymupdf = "^1.25.1"
 
 
 [build-system]
