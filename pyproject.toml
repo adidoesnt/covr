@@ -11,6 +11,7 @@ python = "^3.12"
 pytelegrambotapi = "^4.25.0"
 python-dotenv = "^1.0.1"
 pymupdf = "^1.25.1"
+boto3 = "^1.35.90"
 
 
 [build-system]
