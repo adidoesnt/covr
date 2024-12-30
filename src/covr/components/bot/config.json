@@ -35,6 +35,12 @@
         },
         "coverletter": {
             "response": "Please send me the description of the job you would like me to write a cover letter for."
+        },
+        "coverletter_generating": {
+            "response": "Please give me a moment to generate your cover letter."
+        },
+        "coverletter_generated": {
+            "response": "Here's your cover letter:"
         }
     }
 }

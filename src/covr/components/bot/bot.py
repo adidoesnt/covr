@@ -5,7 +5,7 @@ from typing import List
 from covr.components.bot.constants import TELEGRAM_BOT_TOKEN
 from covr.components.bot.config import config
 from covr.components.resume_parser.parser import parse_pdf
-from covr.components.chromadb.db import upload_resume as save_resume_to_db, check_if_resume_exists
+from covr.components.chromadb.db import upload_resume as save_resume_to_db, check_if_resume_exists, generate_cover_letter as generate_cover_letter_response
 
 bot = TeleBot(TELEGRAM_BOT_TOKEN)
 
@@ -67,11 +67,18 @@ def handle_coverletter_request(message):
     bot.register_next_step_handler(callback=generate_cover_letter, message=message)
     
 def generate_cover_letter(message: Message):
-    # TODO: Implement cover letter generation
+    bot.reply_to(message=message, text=config['responses']['coverletter_generating']['response'])
     
-    response = 'Sorry, this feature is not yet implemented.'
+    user = message.from_user
+    user_id = user.id
+    
+    message_text = message.text
+    
+    cover_letter = generate_cover_letter_response(user_id=user_id, job_description=message_text)
+    response = config['responses']['coverletter_generated']['response']
+    # TODO: response += f"\n\n{cover_letter}"
+
     bot.reply_to(message, response)
-    
 
 def set_my_commands():
     try:
