@@ -4,8 +4,8 @@ from typing import List
 
 from covr.components.bot.constants import TELEGRAM_BOT_TOKEN
 from covr.components.bot.config import config
-from covr.components.resume_parser.parser import parse_pdf
-from covr.components.chromadb.db import upload_resume as save_resume_to_db, check_if_resume_exists, generate_cover_letter as generate_cover_letter_response
+from covr.components.resume.parser import parse_pdf
+from covr.components.resume.uploader import check_if_resume_exists, upload_resume as save_resume_to_db
 
 bot = TeleBot(TELEGRAM_BOT_TOKEN)
 
@@ -54,12 +54,12 @@ def handle_coverletter_request(message):
     user = message.from_user
     user_id = user.id
     
-    is_resume_uploaded = check_if_resume_exists(user_id=user_id)
+    # is_resume_uploaded = check_if_resume_exists(user_id=user_id)
     
-    if not is_resume_uploaded:
-        response = config['responses']['no_resume']['response']
-        bot.reply_to(message, response)
-        return
+    # if not is_resume_uploaded:
+    #     response = config['responses']['no_resume']['response']
+    #     bot.reply_to(message, response)
+    #     return
     
     response = config['responses']['coverletter']['response']
     bot.reply_to(message, response)
@@ -74,7 +74,7 @@ def generate_cover_letter(message: Message):
     
     message_text = message.text
     
-    cover_letter = generate_cover_letter_response(user_id=user_id, job_description=message_text)
+    # cover_letter = generate_cover_letter_response(user_id=user_id, job_description=message_text)
     response = config['responses']['coverletter_generated']['response']
     # TODO: response += f"\n\n{cover_letter}"
 

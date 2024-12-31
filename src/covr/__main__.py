@@ -2,7 +2,7 @@ from threading import Thread, Event
 import time
 
 from covr.components.bot.bot import init_bot
-from covr.components.resume_parser.queue import pull_messages
+from covr.components.resume.queue import pull_messages
 from covr.components.chromadb.db import connect_chromadb
 
 shutdown_event = Event()

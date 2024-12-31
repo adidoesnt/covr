@@ -2,7 +2,7 @@ import boto3
 import time
 import json
 
-from covr.components.resume_parser.constants import RESUME_QUEUE_URL, POLLING_INTERVAL_MS
+from covr.components.resume.constants import RESUME_QUEUE_URL, POLLING_INTERVAL_MS
 from covr.components.aws.constants import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_PROFILE, ENDPOINT_URL
 
 session = boto3.Session(
