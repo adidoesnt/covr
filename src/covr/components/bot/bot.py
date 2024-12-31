@@ -5,7 +5,7 @@ from typing import List
 from covr.components.bot.constants import TELEGRAM_BOT_TOKEN
 from covr.components.bot.config import config
 from covr.components.resume.parser import parse_pdf
-from covr.components.resume.uploader import check_if_resume_exists, upload_resume as save_resume_to_db
+from covr.components.resume.uploader import check_if_resume_exists, upload_resume as save_resume_to_db, delete_resume
 
 bot = TeleBot(TELEGRAM_BOT_TOKEN)
 
@@ -33,6 +33,11 @@ def upload_resume(message: Message):
 def file_handler(message: Message):
     user = message.from_user
     user_id = user.id
+    
+    is_resume_uploaded = check_if_resume_exists(user_id=user_id)
+    
+    if is_resume_uploaded:
+        delete_resume(user_id=user_id)
     
     file_id = message.document.file_id
     file = bot.get_file(file_id=file_id)
