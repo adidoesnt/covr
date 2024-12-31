@@ -15,6 +15,10 @@
         {
             "command": "coverletter",
             "description": "Generate a cover letter."
+        },
+        {
+            "command": "query",
+            "description": "Query your resume."
         }
     ],
     "responses": {
@@ -41,6 +45,15 @@
         },
         "coverletter_generated": {
             "response": "Here's your cover letter:"
+        }, 
+        "query_prompt": {
+            "response": "What would you like to know about your resume?"
+        },
+        "querying_resume": {
+            "response": "Please give me a moment to query your resume."
+        },
+        "query_error": {
+            "response": "Sorry, there was an error querying your resume. Please try again later."
         }
     }
 }
