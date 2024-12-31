@@ -6,3 +6,6 @@ __pycache__
 
 # Chroma DB
 **/storage
+
+# Localstack
+**/localstack-data

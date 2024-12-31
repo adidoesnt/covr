@@ -1,0 +1,19 @@
+services:
+  db:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/storage
+    env_file: .env
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    env_file:
+      - .env
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./aws-config:/root/.aws"
+      - ./localstack-setup.sh:/etc/localstack/init/ready.d/script.sh

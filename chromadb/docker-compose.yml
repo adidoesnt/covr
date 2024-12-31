@@ -1,8 +1,0 @@
-services:
-  db:
-    image: chromadb/chroma:latest
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./storage:/storage
-    env_file: .env
