@@ -54,12 +54,12 @@ def handle_coverletter_request(message):
     user = message.from_user
     user_id = user.id
     
-    # is_resume_uploaded = check_if_resume_exists(user_id=user_id)
+    is_resume_uploaded = check_if_resume_exists(user_id=user_id)
     
-    # if not is_resume_uploaded:
-    #     response = config['responses']['no_resume']['response']
-    #     bot.reply_to(message, response)
-    #     return
+    if not is_resume_uploaded:
+        response = config['responses']['no_resume']['response']
+        bot.reply_to(message, response)
+        return
     
     response = config['responses']['coverletter']['response']
     bot.reply_to(message, response)
