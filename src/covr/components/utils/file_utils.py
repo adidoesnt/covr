@@ -1,10 +1,6 @@
 import os
 
-def is_directory(path):
+def is_directory(path: str) -> bool:
+    """Check if a path is a directory"""
+
     return os.path.isdir(path)
-
-def is_file(path):
-    return os.path.isfile(path)
-
-def is_pdf(path):
-    return path.endswith(".pdf")

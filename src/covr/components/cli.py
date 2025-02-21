@@ -1,18 +1,17 @@
 import click
 
-from covr.components.handlers.upload_files import upload_files_handler 
+from covr.components.handlers.upload import upload_handler 
 
 @click.group()
 def cli():
     """Command-line interface for Covr"""
     pass
 
-@click.command(name="upload-files")
-@click.option("--file", multiple=True, prompt="File(s) to upload", help="Enter path(s) to file(s) to upload")
-def upload_files(file):
+@click.command(name="upload")
+@click.option("--dir", prompt="Directory from which to upload files", help="Enter path to directory from which to upload files")
+def upload_files(dir):
     """Upload files to be stored in the knowledge base"""
-    
-    for f in file:
-        upload_files_handler(f)
+
+    upload_handler(dir)
 
 cli.add_command(upload_files)
