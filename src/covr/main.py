@@ -1,2 +1,4 @@
+from covr.components.cli import cli
+
 def main():
-    print("Hello, World!")
+    cli()
