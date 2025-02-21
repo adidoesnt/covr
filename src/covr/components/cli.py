@@ -1,5 +1,7 @@
 import click
 
+from covr.components.handlers.upload_files import upload_files_handler 
+
 @click.group()
 def cli():
     """Command-line interface for Covr"""
@@ -11,6 +13,6 @@ def upload_files(file):
     """Upload files to be stored in the knowledge base"""
     
     for f in file:
-        print(f"Uploading file: {f}")
+        upload_files_handler(f)
 
 cli.add_command(upload_files)
