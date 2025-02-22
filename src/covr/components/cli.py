@@ -17,10 +17,11 @@ def upload_files(path):
 
 @click.command(name="query")
 @click.option("--query", "-q", prompt="Query to send to the knowledge base", help="Enter the query.")
-def query_knowledge_base(query):
+@click.option("--output", "-o", prompt="Output file path", help="Enter the output file path.")
+def query_knowledge_base(query, output):
     """Query the knowledge base"""
 
-    query_handler(query)
+    query_handler(query, output)
 
 cli.add_command(upload_files)
 cli.add_command(query_knowledge_base)
