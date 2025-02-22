@@ -1,6 +1,7 @@
 import click
 
-from covr.components.handlers.upload import upload_handler 
+from covr.components.handlers.upload import upload_handler
+from covr.components.handlers.query import query_handler
 
 @click.group()
 def cli():
@@ -19,7 +20,7 @@ def upload_files(path):
 def query_knowledge_base(query):
     """Query the knowledge base"""
 
-    print(query)
+    query_handler(query)
 
 cli.add_command(upload_files)
 cli.add_command(query_knowledge_base)

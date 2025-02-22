@@ -8,17 +8,16 @@ from covr.components.environment import OPENAI_API_KEY, CHAT_MODEL
 
 PROMPT_TEMPLATE = """
 You are a helpful job hunting assistant, who excels at extracting information from candidate documents.
-Here is some context regarding the candidate:
-{context}
----
-Based on the context, answer the following question:
-{question}
+Here is some context regarding the candidate:\n
+{context}\n
+---\n
+Based on the context, answer the following question: {question}
 """
 
 def get_context(results: List[Document]) -> str:
     """Get the context from the results"""
     
-    return "\n\n --- \n\n".join([result[0].page_content for result in results])
+    return "\n\n".join([result[0].page_content for result in results])
 
 def get_prompt(query: str, context: str) -> str:
     """Get the prompt for the query"""
@@ -42,7 +41,7 @@ def query(query: str) -> str:
         model=CHAT_MODEL
     )
 
-    response = model.predict(prompt)
+    response = model.invoke(prompt)
 
     print("Generated response.")
-    return response
+    return response.content

@@ -1,4 +1,4 @@
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain.schema import Document
 from typing import List
 
@@ -27,9 +27,9 @@ def get_from_database(query: str, k: int = 3) -> List[Document]:
         embedding_function=embedding_function,
     )
 
-    results = database.similarity_search_with_relevance_scores(query, k=k)
+    results: List[Document] = database.similarity_search_with_relevance_scores(query, k=k)
 
-    if no_result(results):
+    if no_result(results, 0.3):
         raise ValueError("No results found")
     
     return results
