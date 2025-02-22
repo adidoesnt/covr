@@ -6,4 +6,10 @@ services:
     environment:
       - CHROMA_SERVER_AUTHN_CREDENTIALS=dummy-token
       - CHROMA_SERVER_AUTHN_PROVIDER=chromadb.auth.token_authn.TokenAuthenticationServerProvider
+    volumes:
+      - ./chroma-data:/chroma/chroma
+
+volumes:
+  chroma-data:
+    driver: local
       
