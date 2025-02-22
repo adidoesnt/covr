@@ -17,3 +17,7 @@
 
 .venv
 /poetry.toml
+
+# test_data
+test_data
+test_data/*
