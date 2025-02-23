@@ -19,8 +19,8 @@
 /poetry.toml
 
 # Test Data
-test_data
-test_data/*
+knowledge_base
+knowledge_base/*
 
 # Local Database
 infra/local/chroma-data
