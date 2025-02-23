@@ -2,7 +2,7 @@ from langchain_chroma import Chroma
 from langchain.schema import Document
 from typing import List
 
-from covr.components.environment import CHROMA_PATH, CHROMA_COLLECTION_NAME
+from covr.components.environment import CHROMA_PATH, CHROMA_COLLECTION_NAME, K_VALUE, RELEVANCE_SCORE_THRESHOLD
 from covr.components.embeddings import embedding_function
 from covr.components.utils.database import no_result
 
@@ -18,7 +18,7 @@ def save_to_database(chunks: List[Document]):
 
     print(f"Chunks saved to collection {CHROMA_COLLECTION_NAME}, persisted at {CHROMA_PATH}")
 
-def get_from_database(query: str, k: int = 3) -> List[Document]:
+def get_from_database(query: str, k: int = K_VALUE) -> List[Document]:
     """Get documents from the vector store"""
 
     database = Chroma(
@@ -29,7 +29,7 @@ def get_from_database(query: str, k: int = 3) -> List[Document]:
 
     results: List[Document] = database.similarity_search_with_relevance_scores(query, k=k)
 
-    if no_result(results, 0.3):
+    if no_result(results, RELEVANCE_SCORE_THRESHOLD):
         raise ValueError("No results found")
     
     return results
